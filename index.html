@@ -1028,6 +1028,245 @@
     </div>
   </section>
 
+
+<section class="section pricing-table section__heading-alignment--left" id="pricing">
+  <div class="container">
+    <header class="section-heading">
+      <h2>Pricing options</h2>
+      <p>Explain how different pricing options might be valuable to different segments of your audience.</p>
+    </header>
+
+    <div class="pricing-cards">
+      <div class="pricing-card fade-in">
+        <div class="pricing-header">
+          <h3 class="price">$49.99</h3>
+          <p class="plan-name">Regular price</p>
+        </div>
+        <div class="pricing-features">
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Lifetime access</li>
+            <li><i class="fas fa-check-circle"></i> All course materials</li>
+            <li><i class="fas fa-check-circle"></i> Future updates included</li>
+            <li><i class="fas fa-check-circle"></i> Certificate of completion</li>
+          </ul>
+        </div>
+        <a href="/enroll/3248542" class="btn btn-primary btn-full">
+          <i class="fas fa-shopping-cart"></i> Get started now
+        </a>
+      </div>
+
+      <div class="pricing-card popular fade-in delay-1">
+        <div class="popular-badge">Most Popular</div>
+        <div class="pricing-header">
+          <h3 class="price">$1.99<span>/month</span></h3>
+          <p class="plan-name">With 1 month free trial</p>
+        </div>
+        <div class="pricing-features">
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Monthly subscription</li>
+            <li><i class="fas fa-check-circle"></i> First month free</li>
+            <li><i class="fas fa-check-circle"></i> Cancel anytime</li>
+            <li><i class="fas fa-check-circle"></i> All course materials</li>
+          </ul>
+        </div>
+        <a href="/cart/add_product/3248542?price_id=4247792" class="btn btn-accent btn-full">
+          <i class="fas fa-rocket"></i> Get started now
+        </a>
+      </div>
+
+      <div class="pricing-card fade-in delay-2">
+        <div class="pricing-header">
+          <h3 class="price">2 x $4.99</h3>
+          <p class="plan-name">60 day access</p>
+        </div>
+        <div class="pricing-features">
+          <ul>
+            <li><i class="fas fa-check-circle"></i> 60 days full access</li>
+            <li><i class="fas fa-check-circle"></i> All course materials</li>
+            <li><i class="fas fa-check-circle"></i> Download resources</li>
+            <li><i class="fas fa-check-circle"></i> Certificate of completion</li>
+          </ul>
+        </div>
+        <a href="/cart/add_product/3248542?price_id=4247791" class="btn btn-primary btn-full">
+          <i class="fas fa-shopping-cart"></i> Get started now
+        </a>
+      </div>
+
+      <div class="pricing-card fade-in delay-3">
+        <div class="pricing-header">
+          <h3 class="price">12 x $1.99</h3>
+          <p class="plan-name">365 day access</p>
+        </div>
+        <div class="pricing-features">
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Full year access</li>
+            <li><i class="fas fa-check-circle"></i> All course materials</li>
+            <li><i class="fas fa-check-circle"></i> Future updates included</li>
+            <li><i class="fas fa-check-circle"></i> Priority support</li>
+          </ul>
+        </div>
+        <a href="/cart/add_product/3248542?price_id=4247788" class="btn btn-primary btn-full">
+          <i class="fas fa-shopping-cart"></i> Get started now
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Pricing Section */
+  .pricing-table {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(126, 34, 206, 0.03) 100%);
+  }
+
+  .section-heading {
+    text-align: left;
+    margin-bottom: 3rem;
+  }
+
+  .section-heading h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .section-heading h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--gradient-primary);
+    border-radius: 2px;
+  }
+
+  .section-heading p {
+    font-size: 1.125rem;
+    color: var(--gray);
+    max-width: 600px;
+  }
+
+  .pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .pricing-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .pricing-card.popular {
+    border: 2px solid var(--primary);
+    transform: scale(1.03);
+  }
+
+  .pricing-card.popular:hover {
+    transform: scale(1.03) translateY(-5px);
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: -12px;
+    right: 2rem;
+    background: var(--gradient-primary);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-md);
+  }
+
+  .pricing-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  .price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--darker);
+    margin-bottom: 0.5rem;
+  }
+
+  .price span {
+    font-size: 1rem;
+    color: var(--gray);
+    font-weight: 500;
+  }
+
+  .plan-name {
+    color: var(--gray);
+    font-weight: 500;
+  }
+
+  .pricing-features {
+    flex-grow: 1;
+    margin-bottom: 2rem;
+  }
+
+  .pricing-features ul {
+    list-style: none;
+  }
+
+  .pricing-features li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .pricing-features i {
+    color: var(--success);
+    font-size: 1.125rem;
+  }
+
+  .btn-full {
+    width: 100%;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    .pricing-cards {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    .pricing-card.popular {
+      transform: scale(1);
+    }
+    
+    .pricing-card.popular:hover {
+      transform: translateY(-5px);
+    }
+  }
+</style>
+
+
+
+
+
+
+
+  
   <!-- CTA Section -->
   <section class="cta">
     <div class="container">
