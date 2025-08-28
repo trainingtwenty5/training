@@ -1079,10 +1079,6 @@ $(document).ready(function() {
 
 
 
-<a id="cst-v2-section--wfPp-zzL" style="opacity: 0; width: 0 !important; display: block;"></a>
-
-
-
 <style>
 .custom-course-container {
   /* Możesz dodać ogólne style dla całego kontenera, jeśli chcesz */
@@ -1179,61 +1175,44 @@ $(document).ready(function() {
 
 
 
-        /* Search container - normalny stan */
-        .search-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin: 100px auto 20px;
-            padding: 0 20px;
-        }
+/* Search container - normalny stan */
+.search-container {
 
-        /* Sticky Search Box */
-        .sticky {
-            position: fixed;
-            margin-top: 50px;  /* Wysokość navbaru, dostosuj w zależności od rozmiaru navbaru */
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 101;  /* Zapewnia, że search box będzie nad navbar */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            width: 90%;
-            max-width: 600px;
-        }
+}
 
-        /* Styl dla wyszukiwarki */
-        .search-box {
-            width: 100%;
-            padding: 12px 20px;
-            border: 2px solid var(--secondary-color);
-            border-radius: 30px;
-            font-size: 16px;
-            outline: none;
-            transition: all 0.3s;
-        }
+/* Sticky Search Box */
+.sticky {
+  position: fixed;
+  margin-top: 50px;  /* Wysokość navbaru, dostosuj w zależności od rozmiaru navbaru */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 101;  /* Zapewnia, że search box będzie nad navbar */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
 
-        .search-box:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(64, 88, 88, 0.2);
-        }
+/* Styl dla wyszukiwarki */
+.search-box {
+  width: 100%;
+  padding: 12px 20px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 30px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s;
+}
 
-        /* Tylko na telefonach */
-        @media (max-width: 768px) {
-            .search-container {
-                position: fixed;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                z-index: 9999; /* żeby zawsze było na wierzchu */
-                width: 90%; /* dostosuj szerokość do ekranu */
-                max-width: 400px; /* opcjonalnie ograniczenie */
-                margin: 0;
-            }
-            
-            .sticky {
-                width: 90%;
-                max-width: 400px;
-            }
-        }
+.search-box:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(64, 88, 88, 0.2);
+}
+
+/* Dostosowanie na urządzeniach mobilnych */
+@media (max-width: 768px) {
+  .custom-course-container .search-container {
+    top: 0px;
+    transition: all 0.3s, top 0.3s;
+  }
+}
 
 
 </style>
