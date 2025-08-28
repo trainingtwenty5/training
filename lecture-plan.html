@@ -1079,13 +1079,20 @@ $(document).ready(function() {
 
 
 
+<a id="cst-v2-section--wfPp-zzL" style="opacity: 0; width: 0 !important; display: block;"></a>
+
+
+
 <style>
-/* Desktop */
+.custom-course-container {
+  /* Możesz dodać ogólne style dla całego kontenera, jeśli chcesz */
+}
+
 .custom-course-container .search-container {
   position: sticky;
   top: 110px;
   z-index: 100;
-  
+  margin: 0 auto 30px;
   max-width: 800px;
   padding: 15px;
   background: rgba(0, 0, 0, 0.6); /* Ciemne tło z przezroczystością */
@@ -1095,21 +1102,6 @@ $(document).ready(function() {
   box-shadow: 0 8px 16px rgba(0,0,0,0.3);
   transition: all 0.3s ease;
 }
-
-
-/* Tylko na telefonach */
-@media (max-width: 768px) {
-  .search-container {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999; /* żeby zawsze było na wierzchu */
-    width: 90%; /* dostosuj szerokość do ekranu */
-    max-width: 400px; /* opcjonalnie ograniczenie */
-  }
-}
-
 
 .custom-course-container .search-box {
   width: 100%;
