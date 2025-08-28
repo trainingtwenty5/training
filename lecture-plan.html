@@ -1081,10 +1081,19 @@ $(document).ready(function() {
 
 <style>
 /* Domyślnie np. desktop */
-.search-container {
+.custom-course-container .search-container {
   position: sticky;
-  top: 0;
-  z-index: 1000;
+  top: 110px;
+  z-index: 100;
+  
+  max-width: 800px;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.6); /* Ciemne tło z przezroczystością */
+  color: white; /* Jasny tekst */
+  border-radius: 12px;
+  backdrop-filter: blur(8px); /* Efekt rozmycia tła za elementem */
+  box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
 }
 
 /* Tylko na telefonach */
