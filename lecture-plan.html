@@ -1211,10 +1211,16 @@ $(document).ready(function() {
 }
 
 /* Dostosowanie na urządzeniach mobilnych */
+/* Tylko na telefonach */
 @media (max-width: 768px) {
-  .custom-course-container .search-container {
-    top: 0px;
-    transition: all 0.3s, top 0.3s;
+  .search-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* żeby zawsze było na wierzchu */
+    width: 90%; /* dostosuj szerokość do ekranu */
+    max-width: 400px; /* opcjonalnie ograniczenie */
   }
 }
 
