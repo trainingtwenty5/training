@@ -1,1385 +1,1065 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ArcGIS Experience Builder | Training 25</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Drzewko Umiejętności Breaking</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Ikona strony (favicon) -->
-<link rel="icon" type="image/png" href="https://files.cdn.thinkific.com/file_uploads/1010971/images/032/d7f/5ec/1010971_custom_site_themes_id_OzVLWf0AQZWNmpvP9uJr_Logo.png">
-<link rel="icon" href="https://files.cdn.thinkific.com/file_uploads/1010971/images/032/d7f/5ec/1010971_custom_site_themes_id_OzVLWf0AQZWNmpvP9uJr_Logo.png" type="image/png">
-  
-<!-- Ikona dla urządzeń Apple (iPhone, iPad) -->
-<link rel="apple-touch-icon" href="https://import.cdn.thinkific.com/1010971%2Fcustom_site_themes%2Fid%2FOzVLWf0AQZWNmpvP9uJr_Logo.png?width=384&dpr=2">
-
-<!-- Ikona dla Androida / Progressive Web App -->
-<link rel="manifest" href="https://import.cdn.thinkific.com/1010971%2Fcustom_site_themes%2Fid%2FOzVLWf0AQZWNmpvP9uJr_Logo.png?width=384&dpr=2">
-
-
-  
-  <style>
-    :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --secondary: #7e22ce;
-      --accent: #06b6d4;
-      --dark: #1e293b;
-      --darker: #0f172a;
-      --light: #f8fafc;
-      --gray: #94a3b8;
-      --success: #10b981;
-      
-      --gradient-primary: linear-gradient(135deg, #2563eb, #7e22ce);
-      --gradient-accent: linear-gradient(135deg, #06b6d4, #3b82f6);
-      --gradient-card: linear-gradient(135deg, #ffffff, #f1f5f9);
-      
-      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-      
-      --radius: 10px;
-      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      color: var(--dark);
-      background-color: var(--light);
-      line-height: 1.5;
-      overflow-x: hidden;
-      font-size: 0.95rem;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 0.875rem;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-    }
-
-    h2 {
-      font-size: 2rem;
-    }
-
-    h3 {
-      font-size: 1.5rem;
-    }
-
-    p {
-      margin-bottom: 1.25rem;
-      font-size: 0.95rem;
-    }
-
-    a {
-      color: var(--primary);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 1.25rem;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.75rem 1.5rem;
-      border-radius: var(--radius);
-      font-weight: 600;
-      transition: var(--transition);
-      border: none;
-      cursor: pointer;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-    }
-
-    .btn-primary {
-      background: var(--gradient-primary);
-      color: white;
-      box-shadow: var(--shadow-md);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-    }
-
-    .btn-secondary:hover {
-      background: var(--primary);
-      color: white;
-    }
-
-    .btn-accent {
-      background: var(--gradient-accent);
-      color: white;
-    }
-
-    .section {
-      padding: 3.5rem 0;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
-
-    .section-title h2 {
-      position: relative;
-      display: inline-block;
-      margin-bottom: 1.25rem;
-    }
-
-    .section-title h2::after {
-      content: '';
-      position: absolute;
-      bottom: -8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50px;
-      height: 3px;
-      background: var(--gradient-primary);
-      border-radius: 2px;
-    }
-
-    /* Header */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      box-shadow: var(--shadow-sm);
-      padding: 0.875rem 0;
-    }
-
-    .header-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-      font-weight: 700;
-      font-size: 1.25rem;
-      color: var(--darker);
-    }
-
-    .logo img {
-      height: 32px;
-      width: auto;
-    }
-
-    .nav-menu {
-      display: flex;
-      gap: 1.5rem;
-    }
-
-    .nav-link {
-      font-weight: 500;
-      color: var(--dark);
-      position: relative;
-      font-size: 0.95rem;
-    }
-
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--gradient-primary);
-      transition: var(--transition);
-    }
-
-    .nav-link:hover::after {
-      width: 100%;
-    }
-
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
-      font-size: 1.25rem;
-      cursor: pointer;
-      color: var(--dark);
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 8rem 0 4rem;
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(126, 34, 206, 0.03) 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -80px;
-      right: -80px;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: var(--gradient-primary);
-      opacity: 0.1;
-      filter: blur(60px);
-    }
-
-    .hero-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-      align-items: center;
-    }
-
-    .hero-text h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1.25rem;
-      background: var(--gradient-primary);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-text p {
-      font-size: 1.1rem;
-      color: var(--gray);
-      margin-bottom: 2rem;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 0.875rem;
-      flex-wrap: wrap;
-    }
-
-    .hero-image {
-      position: relative;
-    }
-
-    .hero-image img {
-      width: 100%;
-      max-width: 450px;
-      height: auto;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-lg);
-      transform: perspective(800px) rotateY(-10deg);
-      transition: var(--transition);
-    }
-
-    .hero-image img:hover {
-      transform: perspective(800px) rotateY(0);
-    }
-
-    /* Features */
-    .features {
-      background: white;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.75rem;
-    }
-
-    .feature-card {
-      background: var(--gradient-card);
-      padding: 1.75rem;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition);
-      text-align: center;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .feature-icon {
-      width: 55px;
-      height: 55px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 1.25rem;
-      border-radius: 50%;
-      background: var(--gradient-primary);
-      color: white;
-      font-size: 1.5rem;
-    }
-
-    /* Course Info */
-    .course-info {
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(126, 34, 206, 0.03) 100%);
-    }
-
-    .info-container {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3.5rem;
-      align-items: center;
-    }
-
-    .info-image {
-      position: relative;
-    }
-
-    .info-image img {
-      width: 100%;
-      max-width: 450px;
-      height: auto;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .info-badge {
-      position: absolute;
-      top: -12px;
-      right: -12px;
-      background: var(--gradient-primary);
-      color: white;
-      padding: 0.625rem 1.25rem;
-      border-radius: 25px;
-      font-weight: 600;
-      box-shadow: var(--shadow-md);
-      font-size: 0.85rem;
-    }
-
-    .info-content h2 {
-      margin-bottom: 1.25rem;
-    }
-
-    .info-list {
-      list-style: none;
-      margin-bottom: 1.75rem;
-    }
-
-    .info-list li {
-      margin-bottom: 0.625rem;
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-      font-size: 0.95rem;
-    }
-
-    .info-list li::before {
-      content: '✓';
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      background: var(--success);
-      color: white;
-      border-radius: 50%;
-      font-size: 0.7rem;
-    }
-
-    /* Instructor */
-    .instructor {
-      background: white;
-    }
-
-    .instructor-container {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 3.5rem;
-      align-items: center;
-    }
-
-    .instructor-image {
-      position: relative;
-    }
-
-    .instructor-image img {
-      width: 100%;
-      max-width: 300px;
-      height: auto;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .instructor-badge {
-      position: absolute;
-      bottom: -12px;
-      left: -12px;
-      background: var(--gradient-primary);
-      color: white;
-      padding: 0.625rem 1.25rem;
-      border-radius: 25px;
-      font-weight: 600;
-      box-shadow: var(--shadow-md);
-      font-size: 0.85rem;
-    }
-
-    .instructor-bio h2 {
-      margin-bottom: 1.25rem;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 0.875rem;
-      margin-top: 1.25rem;
-    }
-
-    .social-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--light);
-      color: var(--dark);
-      transition: var(--transition);
-    }
-
-    .social-link:hover {
-      background: var(--primary);
-      color: white;
-      transform: translateY(-3px);
-    }
-
-    /* FAQ */
-    .faq {
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(126, 34, 206, 0.03) 100%);
-    }
-
-    .faq-container {
-      max-width: 750px;
-      margin: 0 auto;
-    }
-
-    .faq-item {
-      margin-bottom: 1.25rem;
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      background: white;
-    }
-
-    .faq-question {
-      padding: 1.25rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;
-      font-weight: 600;
-      transition: var(--transition);
-      font-size: 0.95rem;
-    }
-
-    .faq-question:hover {
-      color: var(--primary);
-    }
-
-    .faq-question i {
-      transition: var(--transition);
-    }
-
-    .faq-answer {
-      padding: 0 1.25rem;
-      max-height: 0;
-      overflow: hidden;
-      transition: var(--transition);
-      font-size: 0.9rem;
-    }
-
-    .faq-item.active .faq-question i {
-      transform: rotate(180deg);
-    }
-
-    .faq-item.active .faq-answer {
-      padding: 0 1.25rem 1.25rem;
-      max-height: 500px;
-    }
-
-    /* CTA */
-    .cta {
-      background: var(--gradient-primary);
-      color: white;
-      text-align: center;
-      padding: 5rem 0;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cta::before {
-      content: '';
-      position: absolute;
-      top: -80px;
-      left: -80px;
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .cta::after {
-      content: '';
-      position: absolute;
-      bottom: -80px;
-      right: -80px;
-      width: 250px;
-      height: 250px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .cta h2 {
-      margin-bottom: 1.25rem;
-    }
-
-    .cta p {
-      max-width: 550px;
-      margin: 0 auto 2rem;
-      opacity: 0.9;
-    }
-
-    /* Footer */
-    footer {
-      background: var(--darker);
-      color: white;
-      padding: 4rem 0 1.75rem;
-    }
-
-    .footer-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2.5rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-      margin-bottom: 1.25rem;
-      font-weight: 700;
-      font-size: 1.25rem;
-    }
-
-    .footer-logo img {
-      height: 32px;
-      width: auto;
-    }
-
-    .footer-about p {
-      opacity: 0.7;
-      margin-bottom: 1.25rem;
-      font-size: 0.9rem;
-    }
-
-    .footer-links h3,
-    .footer-contact h3 {
-      margin-bottom: 1.25rem;
-      position: relative;
-      display: inline-block;
-      font-size: 1.1rem;
-    }
-
-    .footer-links h3::after,
-    .footer-contact h3::after {
-      content: '';
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-      width: 25px;
-      height: 2px;
-      background: var(--gradient-primary);
-      border-radius: 2px;
-    }
-
-    .footer-links ul {
-      list-style: none;
-    }
-
-    .footer-links li {
-      margin-bottom: 0.625rem;
-    }
-
-    .footer-links a {
-      color: var(--gray);
-      transition: var(--transition);
-      font-size: 0.9rem;
-    }
-
-    .footer-links a:hover {
-      color: white;
-      padding-left: 5px;
-    }
-
-    .footer-contact p {
-      margin-bottom: 0.875rem;
-      display: flex;
-      align-items: center;
-      gap: 0.625rem;
-      opacity: 0.7;
-      font-size: 0.9rem;
-    }
-
-    .footer-bottom {
-      text-align: center;
-      padding-top: 1.75rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-      opacity: 0.7;
-      font-size: 0.85rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 992px) {
-      h1 {
-        font-size: 2.25rem;
-      }
-      
-      h2 {
-        font-size: 1.75rem;
-      }
-      
-      .hero-content,
-      .info-container,
-      .instructor-container {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-      }
-      
-      .hero-text {
-        order: 2;
-        text-align: center;
-      }
-      
-      .hero-image {
-        order: 1;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .nav-menu {
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100%;
-        flex-direction: column;
-        background: white;
-        padding: 1.75rem;
-        box-shadow: var(--shadow-md);
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: var(--transition);
-      }
-      
-      .nav-menu.active {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-      }
-      
-      .mobile-menu-btn {
-        display: block;
-      }
-      
-      .hero {
-        padding: 6rem 0 2.5rem;
-      }
-      
-      .hero-text h1 {
-        font-size: 2rem;
-      }
-      
-      .hero-buttons {
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 576px) {
-      .section {
-        padding: 2.5rem 0;
-      }
-      
-      .hero-text h1 {
-        font-size: 1.75rem;
-      }
-      
-      .btn {
-        width: 100%;
-        justify-content: center;
-      }
-      
-      .hero-buttons {
-        flex-direction: column;
-      }
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .fade-in {
-      animation: fadeIn 1s ease forwards;
-    }
-
-    .delay-1 {
-      animation-delay: 0.2s;
-    }
-
-    .delay-2 {
-      animation-delay: 0.4s;
-    }
-
-    .delay-3 {
-      animation-delay: 0.6s;
-    }
-  </style>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Z7ZYG4652B"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Z7ZYG4652B');
-</script>
-  
-  
-</head>
-<body>
-  <!-- Header -->
-  <header>
-    <div class="container header-container">
-      <a href="#" class="logo">
-        <img src="https://import.cdn.thinkific.com/1010971%2Fcustom_site_themes%2Fid%2FOzVLWf0AQZWNmpvP9uJr_Logo.png" alt="Training 25">
-        <span>Training 25</span>
-      </a>
-      
-      <nav class="nav-menu">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#price" class="nav-link">Get Started</a>
-        <a href="#features" class="nav-link">Features</a>
-        <a href="#course" class="nav-link">Course</a>
-        <a href="#instructor" class="nav-link">Instructor</a>
-        <a href="#faq" class="nav-link">FAQ</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </nav>
-      
-      <button class="mobile-menu-btn">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-
-
-    
-  </header>
-
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-text fade-in">
-          <h1>Course: ArcGIS Experience Builder</h1>
-          <p>With Experience Builder, you’ll be equipped to contribute to real-world projects that influence how cities are built, how resources are managed, and how communities are supported.</p>
-          <div class="hero-buttons">
-            <a href="https://www.udemy.com/course/arcgis-xbld/?referralCode=4358C636EADDAB1A4C69" target="_blank" class="btn btn-primary">
-              <i class="fas fa-shopping-cart"></i> Enroll Now
-            </a>
-            <a href="https://training25.thinkific.com/order?ct=2fd83e2a-c8cf-4785-8588-c40c6e411388" target="_blank" class="btn btn-secondary">
-              <i class="fas fa-eye"></i> Free Preview
-            </a>
-
-            <a href="https://tasks.training25.pl/" target="_blank" class="btn btn-secondary">
-              <i class="fas fa-eye"></i> Access Free Tasks
-            </a>
-            
-            <a href="https://xbld.training25.pl/lecture-plan" target="_blank" class="btn btn-secondary">
-              <i class="fas fa-eye"></i> Lecture Plan
-            </a>
-            
-          </div>
-        </div>
-        <a href="https://www.udemy.com/course/arcgis-xbld/?referralCode=4358C636EADDAB1A4C69" target="_blank"
-        <div class="hero-image fade-in delay-1">
-          <img src="https://files.cdn.thinkific.com/file_uploads/1010971/images/607/c3d/9fb/new.png" alt="ArcGIS Course">
-        </div>
-    </a>
-
-      
-      </div>
-    </div>
-  </section>
-
-
- <!-- Price section <section class="section pricing-table section__heading-alignment--left" id="pricing"> -->
-  <section id="price" class="section instructor">
-  
-  <div class="container">
-    <div class="section-title">
-      <h2>Pricing options</h2>
-      <p>Explain how different pricing options might be valuable to different segments of your audience.</p>
-    </div>
-
-    <div class="pricing-cards">
-      <div class="pricing-card fade-in">
-        <div class="pricing-header">
-          <h3 class="price">$49.99</h3>
-          <p class="plan-name">Regular price</p>
-        </div>
-        <div class="pricing-features">
-          <ul>
-            <li><i class="fas fa-check-circle"></i> Lifetime access</li>
-            <li><i class="fas fa-check-circle"></i> All course materials</li>
-            <li><i class="fas fa-check-circle"></i> Future updates included</li>
-            <li><i class="fas fa-check-circle"></i> Certificate of completion</li>
-          </ul>
-        </div>
-        <a href="https://training25.thinkific.com/courses/xbld" class="btn btn-primary btn-full">
-          <i class="fas fa-shopping-cart"></i> Get started now
-        </a>
-      </div>
-
-      <div class="pricing-card popular fade-in delay-1">
-        <div class="popular-badge">Most Popular</div>
-        <div class="pricing-header">
-          <h3 class="price">$1.99<span>/month</span></h3>
-          <p class="plan-name">With 1 month free trial</p>
-        </div>
-        <div class="pricing-features">
-          <ul>
-            <li><i class="fas fa-check-circle"></i> Monthly subscription</li>
-            <li><i class="fas fa-check-circle"></i> First month free</li>
-            <li><i class="fas fa-check-circle"></i> Cancel anytime</li>
-            <li><i class="fas fa-check-circle"></i> All course materials</li>
-          </ul>
-        </div>
-        <a href="https://training25.thinkific.com/courses/xbld" class="btn btn-primary btn-full">
-          
-          <i class="fas fa-shopping-cart"></i> Get started now
-        </a>
-      </div>
-
-      <div class="pricing-card fade-in delay-2">
-        <div class="pricing-header">
-          <h3 class="price">2 x $4.99</h3>
-          <p class="plan-name">60 day access</p>
-        </div>
-        <div class="pricing-features">
-          <ul>
-            <li><i class="fas fa-check-circle"></i> 60 days full access</li>
-            <li><i class="fas fa-check-circle"></i> All course materials</li>
-            <li><i class="fas fa-check-circle"></i> Download resources</li>
-            <li><i class="fas fa-check-circle"></i> Certificate of completion</li>
-          </ul>
-        </div>
-        <a href="https://training25.thinkific.com/courses/xbld" class="btn btn-primary btn-full">
-          <i class="fas fa-shopping-cart"></i> Get started now
-        </a>
-      </div>
-
-      <div class="pricing-card fade-in delay-3">
-        <div class="pricing-header">
-          <h3 class="price">12 x $1.99</h3>
-          <p class="plan-name">365 day access</p>
-        </div>
-        <div class="pricing-features">
-          <ul>
-            <li><i class="fas fa-check-circle"></i> Full year access</li>
-            <li><i class="fas fa-check-circle"></i> All course materials</li>
-            <li><i class="fas fa-check-circle"></i> Future updates included</li>
-            <li><i class="fas fa-check-circle"></i> Priority support</li>
-          </ul>
-        </div>
-        <a href="https://training25.thinkific.com/courses/xbld" class="btn btn-primary btn-full">
-          <i class="fas fa-shopping-cart"></i> Get started now
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <style>
-  /* Pricing Section */
-  .pricing-table {
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.03) 0%, rgba(126, 34, 206, 0.03) 100%);
-  }
 
-  .section-heading {
-    text-align: left;
-    margin-bottom: 3rem;
-  }
+:root {
+  --bg: white;
+  --panel: #151936;
+  --text: #000000;
+  --accent: #ffffff;
+  --accent-2: #6df0c2;
+  --locked: #0215c0;
+  --unlocked: rgb(0, 247, 255);
+  --connector: rgb(0, 247, 255);
+  --level1: #FFD700;  /* Żółty dla poziomu 1 */
+  --level2: #4CAF50;  /* Zielony dla poziomu 2 */
+  --level0: #4CAF50;  /* Czerwony dla zablokowanych (poziom 0) */
 
-  .section-heading h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    position: relative;
-    display: inline-block;
-  }
+  
 
-  .section-heading h2::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 60px;
-    height: 4px;
-    background: var(--gradient-primary);
-    border-radius: 2px;
-  }
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
+  --transition: all 0.3s ease;
+}
+/* Style dla branch-skill */
+.branch-skill.level0 { background: var(--level0); }
+.branch-skill.level1 { background: var(--level1); }
+.branch-skill.level2 { background: var(--level2); }
+.branch-skill.level3 { background: var(--level3); }
 
-  .section-heading p {
-    font-size: 1.125rem;
-    color: var(--gray);
-    max-width: 600px;
-  }
+/* Style dla main-skill */
+.main-skill.level0 { background: var(--level0); }
+.main-skill.level1 { background: var(--level1); }
+.main-skill.level2 { background: var(--level2); }
+.main-skill.level3 { background: var(--level3); }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  .pricing-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-  }
+body {
+  font-family: 'Inter', 'SF Pro Text', Roboto, Arial, sans-serif;
+  background: white;
+  color: var(--text);
+  overflow-x: hidden;
+  padding: 20px;
+  min-height: 100vh;
+  line-height: 1.6;
+  transform: scale(0.8);
+  transform-origin: top center; /* zaczyna skalowanie od góry i środka ekranu */
+}
 
-  .pricing-card {
-    background: white;
-    border-radius: var(--radius);
-    padding: 2rem;
-    box-shadow: var(--shadow-md);
-    transition: var(--transition);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-  }
+.container { max-width: 1400px; margin: 0 auto; }
 
-  .pricing-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
-  }
+header { text-align: center; margin-bottom: 30px; padding: 20px; }
 
-  .pricing-card.popular {
-    border: 2px solid var(--primary);
-    transform: scale(1.03);
-  }
+.branch-progress {
+  text-align: center;
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: rgb(255, 255, 255);/* --text = #000000 czyli czarny */
+  background: rgb(0, 0, 0); /* lekko przezroczysty ciemny pasek */
+  padding: 4px 8px;
+  border-radius: var(--radius-md);
+}
 
-  .pricing-card.popular:hover {
-    transform: scale(1.03) translateY(-5px);
-  }
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+}
 
-  .popular-badge {
-    position: absolute;
-    top: -12px;
-    right: 2rem;
-    background: var(--gradient-primary);
-    color: white;
-    padding: 0.5rem 1.5rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
-    font-weight: 600;
-    box-shadow: var(--shadow-md);
-  }
+.subtitle {
+  color: #8a90b0;
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
 
-  .pricing-header {
-    text-align: center;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #e2e8f0;
-  }
+/* Ekran logowania */
+.auth-container {
+  max-width: 400px;
+  margin: 100px auto;
+  padding: 30px;
+  background: var(--panel);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.308);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(10px);
+}
 
-  .price {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: var(--darker);
-    margin-bottom: 0.5rem;
-  }
+.auth-container h2 { text-align: center; margin-bottom: 20px; font-weight: 700; }
 
-  .price span {
-    font-size: 1rem;
-    color: var(--gray);
-    font-weight: 500;
-  }
+.auth-input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 15px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgb(255, 255, 255);
+  color: var(--text);
+  font-size: 1rem;
+  transition: var(--transition);
+}
 
-  .plan-name {
-    color: var(--gray);
-    font-weight: 500;
-  }
+.auth-input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgb(255, 255, 255);
+}
 
-  .pricing-features {
-    flex-grow: 1;
-    margin-bottom: 2rem;
-  }
+.auth-button {
+  width: 100%;
+  padding: 12px;
+  border-radius: var(--radius-lg);
+  border: none;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: var(--bg);
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: var(--transition);
+}
 
-  .pricing-features ul {
-    list-style: none;
-  }
+.auth-button:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
-  .pricing-features li {
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
+.auth-switch {
+  text-align: center;
+  color: #000000;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: var(--transition);
+}
 
-  .pricing-features i {
-    color: var(--success);
-    font-size: 1.125rem;
-  }
+.auth-switch:hover { color: var(--accent); }
 
-  .btn-full {
-    width: 100%;
+.error-message { color: #ff6b6b; text-align: center; margin: 10px 0; font-size: 14px; }
+
+/* Panel użytkownika */
+.user-panel {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.301);
+  padding: 15px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgb(0, 0, 0);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 200px;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-md);
+}
+
+.user-info { display: flex; align-items: center; gap: 10px; }
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  box-shadow: var(--shadow-sm);
+}
+
+.user-name { font-weight: 600; }
+
+.progress-bar { height: 6px; background: var(--locked); border-radius: 3px; overflow: hidden; }
+
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 3px; transition: width 0.5s ease; }
+
+.progress-text { font-size: 0.8rem; text-align: center; opacity: 0.8; z-index: 100;}
+
+.logout-btn {
+  padding: 8px;
+  background: rgba(128, 17, 17, 0.322);
+  color: rgb(0, 0, 0);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.logout-btn:hover { background: #000000ab;; transform: translateY(-1px); }
+
+/* Przyciski zwijania/rozwijania gałęzi na telefonach */
+.toggle-branch {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1.3rem;
+  color: var(--text);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.level { position: relative; }
+
+/* Responsywność - ULEPSZONA */
+@media (max-width: 1200px) {
+  .branch-left { right: calc(50% + 80px); }
+  .branch-right { left: calc(50% + 80px); }
+  .branch::before { width: 80px; }
+  .branch-left::before { right: -80px; }
+  .branch-right::before { left: -80px; }
+}
+
+@media (max-width: 900px) {
+  .branch-left { right: calc(50% + 60px); }
+  .branch-right { left: calc(50% + 60px); }
+  .branch::before { width: 60px; }
+  .branch-left::before { right: -60px; }
+  .branch-right::before { left: -60px; }
+  .main-skill, .branch-skill { min-width: 130px; padding: 10px 14px; }
+  .skill-name { font-size: 0.9rem; }
+}
+
+@media (max-width: 768px) {
+  .tree-level { flex-direction: column; align-items: center; margin: 60px 0; gap: 30px; }
+  .branch {
+    position: static;
+    flex-direction: row;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
   }
+  .branch::before, .branch-skill::before { display: none; }
+  .toggle-branch { display: block; }
+  .branch.collapsed { display: none; }
+  .user-panel { position: relative; top: unset; right: unset; margin: 0 auto 20px auto; width: 100%; max-width: 400px; }
+}
 
-  @media (max-width: 768px) {
-    .pricing-cards {
-      grid-template-columns: 1fr;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-    
-    .pricing-card.popular {
-      transform: scale(1);
-    }
-    
-    .pricing-card.popular:hover {
-      transform: translateY(-5px);
-    }
-  }
+@media (max-width: 640px) {
+  body { padding: 15px; }
+  .auth-container { margin: 50px auto; padding: 20px; }
+  h1 { font-size: 2rem; }
+  .main-skill, .branch-skill { min-width: 120px; padding: 10px 12px; }
+  .skill-name { font-size: 0.85rem; }
+  .skill-level { font-size: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.8rem; }
+  .subtitle { font-size: 1rem; }
+  .main-skill, .branch-skill { min-width: 110px; padding: 8px 10px; }
+  .skill-name { font-size: 0.8rem; }
+}
+
+/* Główna aplikacja */
+.app-container { display: none; }
+
+/* Drzewko umiejętności */
+.skill-tree { position: relative; display: flex; flex-direction: column; align-items: center; padding: 2rem 0; }
+
+/* Centralna oś drzewka */
+.tree-axis {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--connector); /* seledynowy kolor z :root */
+  border-radius: 3px;
+  z-index: 9999; /* Zwiększ z-index aby oś była na wierzchu */
+  left: 50%;
+  transform: translateX(-50%) scale(1.25); /* Kompensuj skalowanie body */
+  pointer-events: none; /* Zapobiega zakłócaniu interakcji z elementami */
+}
+
+/* Usuń lub zmodyfikuj regułę, która chowa oś w widoku grywalizacji */
+.app-container.gamification-view .tree-axis {
+  display: block !important; /* Nadpisz ukrywanie osi */
+}
+
+
+/* Poziomy drzewka */
+.tree-level { position: relative; display: flex; justify-content: center; margin: 60px 0; z-index: 2; }
+
+/* Główny skill na osi */
+.main-skill {
+  position: relative;
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  min-width: 120px;
+  z-index: 3;
+  box-shadow: var(--shadow-md);
+  cursor: pointer;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.main-skill:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+
+
+/* Skill na gałęzi */
+.branch-skill {
+  position: relative;
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  min-width: 140px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.branch-skill:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+.branch-skill.level1 { background: var(--level1); }
+.branch-skill.level2 { background: var(--level2); }
+
+/* Gałęzie (lewa i prawa) - układ poziomy */
+.branch { position: absolute; top: 50%; display: flex; flex-direction: row; align-items: center; gap: 40px; transform: translateY(-50%); }
+.branch-left { right: calc(50% + 100px); flex-direction: row-reverse; align-items: center; }
+.branch-right { left: calc(50% + 100px); flex-direction: row; align-items: center; }
+.branch::before { content: ""; position: absolute; top: 50%; width: 100px; height: 2px; background: #000000; }
+.branch-left::before { right: -100px; }
+.branch-right::before { left: -100px; }
+
+/* Responsywność mobilna dodatkowa */
+@media (max-width: 768px) {
+  .branch { position: relative; top: auto; left: auto; right: auto; transform: none; flex-direction: row; align-items: center; gap: 20px; }
+  .branch-left, .branch-right { flex-direction: row; align-items: center; }
+  .branch::before { position: absolute; top: 50%; width: 60px; height: 2px; background: #000000; }
+  .branch-left::before { right: -60px; }
+  .branch-right::before { left: -60px; }
+  .branch-skill::before { top: 50%; left: -30px; width: 30px; height: 2px; }
+}
+
+
+/* Mini-kafelki z filmami */
+.branch-skill.mini-video {
+    min-width: 180px;
+    padding: 6px;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    border: 1px solid rgb(0, 0, 0);
+    background: rgba(255, 193, 7, 0.2); /* lekko żółty, pasujący do Poziomu 2 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.branch-skill.mini-video iframe {
+    width: 100%;
+    height: 200px;
+    border: none;
+    border-radius: 6px;
+}
+
+.branch-skill.mini-video:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+}
+
+
+/* Dodaj to do sekcji CSS */
+.app-container.gamification-view .tree-axis {
+  display: none;
+}
+
+.app-container.gamification-view .skill-tree {
+  display: none;
+}
+
+.app-container.gamification-view #gamification-section {
+  display: block;
+}
+
+.tree-axis {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--connector); /* seledynowy kolor z :root */
+  border-radius: 3px;
+  z-index: 1;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 </style>
 
-  
-  <!-- Features Section -->
-  <section id="features" class="section features">
-    <div class="container">
-      <div class="section-title">
-        <h2>Why Choose Our Course?</h2>
-        <p>Discover the benefits of learning ArcGIS Experience Builder with us</p>
-      </div>
-      
-      <div class="features-grid">
-        <div class="feature-card fade-in">
-          <div class="feature-icon">
-            <i class="fas fa-graduation-cap"></i>
-          </div>
-          <h3>Comprehensive Curriculum</h3>
-          <p>81+ lessons covering all aspects of ArcGIS Experience Builder from basics to advanced techniques.</p>
-        </div>
-        
-        <div class="feature-card fade-in delay-1">
-          <div class="feature-icon">
-            <i class="fas fa-clock"></i>
-          </div>
-          <h3>Self-Paced Learning</h3>
-          <p>Learn at your own pace with lifetime access to all course materials and future updates.</p>
-        </div>
-        
-        <div class="feature-card fade-in delay-2">
-          <div class="feature-icon">
-            <i class="fas fa-medal"></i>
-          </div>
-          <h3>Certificate of Completion</h3>
-          <p>Receive a certificate that you can showcase to employers or clients after completing the course.</p>
-        </div>
-      </div>
+
+
+
+
+</head>
+<body>
+  <!-- Ekran logowania -->
+  <div id="auth-container" class="auth-container">
+    <h2 style="color:white">Logowanie do Umiejętności Breaking</h2>
+    <div id="login-form">
+      <input type="email" id="login-email" class="auth-input" placeholder="Adres email">
+      <input type="password" id="login-password" class="auth-input" placeholder="Hasło">
+      <div id="login-error" class="error-message"></div>
+      <button id="login-btn" style="color:black" class="auth-button">Zaloguj się</button>
+      <div class="auth-switch" style="color:white" id="show-register">Nie masz konta? Zarejestruj się</div>
     </div>
-  </section>
-
-  <!-- Course Info Section -->
-  <section id="course" class="section course-info">
-    <div class="container">
-      <div class="info-container">
-        <a href="https://www.udemy.com/course/arcgis-xbld/learn/?referralCode=4358C636EADDAB1A4C69" target="_blank">
-        
-        <div class="info-image fade-in">
-          <img src="https://files.cdn.thinkific.com/file_uploads/1010971/images/2fe/9ae/bbf/new2.png" alt="Course Ratings">
-          <div class="info-badge">4.9/5 Rating</div>
-        </div>
-        </a>
-        
-        <div class="info-content fade-in delay-1">
-          <h2>What You'll Get</h2>
-          <ul class="info-list">
-            <li>Fully in English with clear explanations</li>
-            <li>Data on France's largest ski resort included</li>
-            <li>Lifetime access to all course materials</li>
-            <li>30-day money-back guarantee</li>
-            <li>Highly modular structure - learn what you need</li>
-          </ul>
-          <a href="https://www.udemy.com/course/arcgis-xbld/?referralCode=4358C636EADDAB1A4C69" target="_blank" class="btn btn-primary">
-            <i class="fas fa-shopping-cart"></i> Enroll Now
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Instructor Section -->
-  <section id="instructor" class="section instructor">
-    <div class="container">
-      <div class="section-title">
-        <h2>About Your Instructor</h2>
-        <p>Learn from an experienced GIS specialist</p>
-      </div>
-      
-      <div class="instructor-container">
-        <div class="instructor-image fade-in">
-          <img src="https://files.cdn.thinkific.com/file_uploads/1010971/images/782/68f/702/IMG_1383.png" alt="Daniel Buchar">
-          <div class="instructor-badge">GIS Expert</div>
-        </div>
-        
-        <div class="instructor-bio fade-in delay-1">
-          <h2>Daniel Buchar</h2>
-          <p>Experienced GIS specialist with training at Esri Polska. Passionate about teaching others how to leverage ArcGIS tools for their projects and career growth.</p>
-          <p>My goal is to make complex GIS concepts accessible to everyone, regardless of their technical background.</p>
-          
-          <div class="social-links">
-            <a href="https://www.linkedin.com/in/danielb03/?locale=en_US" target="_blank" class="social-link">
-              <i class="fab fa-linkedin-in"></i>
-            </a>
-            <a href="https://x.com/trainingtwenty5" class="social-link">
-              <i class="fab fa-twitter"></i>
-            </a>
-            <a href="https://www.youtube.com/@Trainingtwenty5" class="social-link">
-              <i class="fab fa-youtube"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ Section -->
-  <section id="faq" class="section faq">
-    <div class="container">
-      <div class="section-title">
-        <h2>Frequently Asked Questions</h2>
-        <p>Find answers to common questions about our course</p>
-      </div>
-      
-      <div class="faq-container">
-        <div class="faq-item fade-in">
-          <div class="faq-question">
-            <span>How long does the course take to complete?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>Although the total duration of the lessons is about 5.5 hours, they are modular and you can return to them anytime. You can take the course at your own pace – there's no set time limit to complete it.</p>
-            <p>As for the credits, the cost is approximately 0.06 credits per 24 hours for data storage. The rest of the course components are free of charge. The only exception is one analysis-related lesson, but it's not required – you can simply watch it. So the total depends on how many days it takes you to complete the course.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item fade-in delay-1">
-          <div class="faq-question">
-            <span>How much does the course cost?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>The course costs $49.99, and this gives you lifetime access. This is far less expensive than one-on-one training.</p>
-            <p>Additionally:</p>
-            <ul>
-              <li>You receive unlimited access.</li>
-              <li>If for any reason the platform ceases to exist, you will get access to the materials on another platform or receive the full set of videos and data individually.</li>
-              <li>30-day money-back guarantee – try it risk-free, love it or get a full refund.</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="faq-item fade-in delay-1">
-          <div class="faq-question">
-            <span>What's the difference between Normal Mode and Summer Mode?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>Normal Mode is the full version of the course, including all lessons.</p>
-            <p>Summer Mode is a shortened version of the course, featuring selected key lessons. It's perfect if you're short on time but want to quickly get familiar with the basics and functionality of the application.</p>
-            <p>Regarding the Summer Mode and Normal Mode – the way it works is that the knowledge presented in Summer Mode is actually the most essential part of the course. If you skip Summer Mode, you won't find that information repeated in the Normal Mode videos.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item fade-in delay-1">
-          <div class="faq-question">
-            <span>How many lessons are in the course?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>There are more than 81 lessons in the course. The remaining elements consist of quizzes and assignments.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item fade-in delay-1">
-          <div class="faq-question">
-            <span>Do you provide certification?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>I can provide certification for the lessons you completed to employers or clients. I have no affiliation with ESRI so any certification provided is not officially endorsed by ESRI.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item fade-in delay-1">
-          <div class="faq-question">
-            <span>Are group discounts available?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>Yes, I offer group discounts for purchasing multiple seats at the same organization.</p>
-            <p>Email me at DanielBuchar@training25.pl with the number of seats you plan to purchase to receive a quote with discount codes.</p>
-          </div>
-        </div>
-        
-        <div class="faq-item fade-in delay-2">
-          <div class="faq-question">
-            <span>Are consultations available?</span>
-            <i class="fas fa-chevron-down"></i>
-          </div>
-          <div class="faq-answer">
-            <p>Yes, consultations are available for $299.99.</p>
-            <p>They help resolve issues with application configuration.</p>
-            <p>Please note:</p>
-            <ul>
-              <li>The consultations are conducted in English.</li>
-              <li>They include a total of 8 hours.</li>
-              <li>You have one year from the date of purchase to use them.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-<section class="section pricing-table section__heading-alignment--left" id="pricing">
-
-  
-
-
-
-
-
-
-  
-  <!-- CTA Section -->
-  <section class="cta">
-    <div class="container">
-      <h2 class="fade-in">Ready to Master ArcGIS Experience Builder?</h2>
-      <p class="fade-in delay-1">Join hundreds of students who have transformed their GIS skills with our comprehensive course</p>
-      <a href="https://www.udemy.com/course/arcgis-xbld/?referralCode=4358C636EADDAB1A4C69" target="_blank" class="btn btn-primary">
-        <i class="fas fa-rocket"></i> Get Started Today
-      </a>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer id="contact">
-    <div class="container">
-      <div class="footer-container">
-        <div class="footer-about">
-          <a href="#" class="footer-logo">
-            <img src="https://import.cdn.thinkific.com/1010971%2Fcustom_site_themes%2Fid%2FOzVLWf0AQZWNmpvP9uJr_Logo.png" alt="Training 25">
-            <span>Training 25</span>
-          </a>
-          <p>Master ArcGIS Experience Builder with our comprehensive online course. Learn to create interactive web applications with ease.</p>
-        </div>
-        
-        <div class="footer-links">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#course">Course</a></li>
-            <li><a href="#instructor">Instructor</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
-        </div>
-        
-        <div class="footer-contact">
-          <h3>Contact Us</h3>
-          <p><i class="fas fa-envelope"></i> DanielBuchar@training25.pl</p>
-          <p><i class="fas fa-map-marker-alt"></i> Suchardy 4, 50-362 Wrocław, Poland</p>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>© 2025 Training 25. All rights reserved.</p>
-        <p>Esri, ArcGIS Online, and ArcGIS Experience Builder are trademarks of Esri and/or its subsidiaries.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Mobile menu toggle
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const navMenu = document.querySelector('.nav-menu');
     
-    mobileMenuBtn.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
-      mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
-        ? '<i class="fas fa-times"></i>' 
-        : '<i class="fas fa-bars"></i>';
-    });
-    
-    // FAQ accordion
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-      const question = item.querySelector('.faq-question');
+    <div id="register-form" style="display: none;">
+      <input type="text" id="register-name" class="auth-input" placeholder="Imię i nazwisko">
+      <input type="email" id="register-email" class="auth-input" placeholder="Adres email">
+      <input type="password" id="register-password" class="auth-input" placeholder="Hasło (min. 6 znaków)">
+      <div id="register-error" class="error-message"></div>
+      <button id="register-btn" class="auth-button" style="color:white">Zarejestruj się</button>
+      <div class="auth-switch" id="show-login" style="color:white">Masz już konto? Zaloguj się</div>
+    </div>
+  </div>
+
+  <!-- Główna aplikacja -->
+  <div id="app-container" class="app-container">
+    <div class="container">
+      <header>
+        <h1>Zdobyte umiejętności Breakingu</h1>
+        <p class="subtitle">Postępy w nauce breakdance</p>
+      </header>
       
-      question.addEventListener('click', () => {
-        item.classList.toggle('active');
-      });
-    });
+      <div class="skill-tree" id="skillTree">
+        <div class="tree-axis"></div>
+        <!-- Drzewko będzie generowane dynamicznie -->
+      </div>
+    </div>
     
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
-          });
-          
-          // Close mobile menu if open
-          if (navMenu.classList.contains('active')) {
-            navMenu.classList.remove('active');
-            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    <div class="user-panel">
+      <div class="user-info">
+        <div class="user-avatar" id="userAvatar">U</div>
+        <div class="user-name" id="userName">Użytkownik</div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+      </div>
+      <div class="progress-text" id="progressText">0/25 umiejętności</div>
+      <button class="logout-btn" id="logoutBtn">Wyloguj</button>
+      <!-- W user-panel, pod logout-btn -->
+<button class="logout-btn" id="gamificationBtn" >Grywalizacja</button>
+
+    </div>
+  </div>
+
+
+
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { 
+      getFirestore, 
+      collection, 
+      getDocs, 
+      doc, 
+      getDoc, 
+      setDoc,
+      updateDoc 
+    } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+    import { 
+      getAuth, 
+      createUserWithEmailAndPassword, 
+      signInWithEmailAndPassword, 
+      signOut, 
+      onAuthStateChanged 
+    } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBdhMIiqetOfDGP85ERxtgwn3AXR50pBcE",
+      authDomain: "base-468e0.firebaseapp.com",
+      projectId: "base-468e0",
+      storageBucket: "base-468e0.appspot.com",
+      messagingSenderId: "829161895559",
+      appId: "1:829161895559:web:d832541aac05b35847ea22"
+    };
+    
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+
+        // Zmienne globalne
+    let userSkills = {};
+    let currentUserId = null;
+    let allUsers = [];
+    let isGamificationView = false;
+    let usersData = {};
+    let currentUserData = null;
+
+
+    // Struktura drzewka umiejętności
+    const SKILL_TREE = [
+      {
+        id: "toprock",
+        name: "Toprock",
+        desc: "Podstawowe kroki wykonywane na stojąco",
+        level: "Poziom podstawowy",
+        branches: [
+          {
+            direction: "left",
+            skills: [
+              { id: "basic-toprock", name: "Basic Toprock", level: "Poziom 1" },
+              { id: "indian-step", name: "Indian Step", level: "Poziom 1", req: ["basic-toprock"], videoUrl: "https://www.youtube-nocookie.com/embed/xOXyKlhGiLE?si=hAqhz4vdzQxmLcXD" },
+              { id: "side-step", name: "Side Step", level: "Poziom 2", req: ["indian-step"] },
+              { id: "crossover-step", name: "Crossover Step", level: "Poziom 2", req: ["side-step"] },
+              { id: "advanced-toprock", name: "Zaawansowane Toprock", level: "Poziom 3", req: ["crossover-step"] }
+            ]
           }
+        ]
+      },
+      {
+        id: "footwork",
+        name: "Footwork",
+        desc: "Ruchy wykonywane blisko ziemi",
+        level: "Poziom średniozaawansowany",
+        branches: [
+          {
+            direction: "right",
+            skills: [
+              { id: "basic-6step", name: "6-step", level: "Poziom 1" },
+              { id: "cc", name: "CC (Kick-outs)", level: "Poziom 1", req: ["basic-6step"]},
+              { id: "3step", name: "3-step", level: "Poziom 2", req: ["basic-6step"], videoUrl: "https://www.youtube-nocookie.com/embed/xOXyKlhGiLE?si=hAqhz4vdzQxmLcXD"  },
+              { id: "coffee-grinder", name: "Coffee Grinder", level: "Poziom 2", req: ["cc"] },
+              { id: "footwork-combos", name: "Kombinacje", level: "Poziom 3", req: ["3step","coffee-grinder"] }
+            ]
+          }
+        ]
+      },
+      {
+        id: "freezes",
+        name: "Freezy",
+        desc: "Pozycje zatrzymania w tańcu",
+        level: "Poziom zaawansowany",
+        branches: [
+          {
+            direction: "left",
+            skills: [
+              { id: "baby-freeze", name: "Baby Freeze", level: "Poziom 1" },
+              { id: "chair-freeze", name: "Chair Freeze", level: "Poziom 1", req: ["baby-freeze"] },
+              { id: "airchair", name: "Airchair", level: "Poziom 2", req: ["chair-freeze"] },
+              { id: "handstand-freeze", name: "Handstand Freeze", level: "Poziom 2", req: ["baby-freeze"] },
+              { id: "combo-freezes", name: "Kombinacje Freezów", level: "Poziom 3", req: ["airchair","handstand-freeze"] }
+            ]
+          }
+        ]
+      },
+      {
+        id: "powermoves",
+        name: "Powermoves",
+        desc: "Dynamiczne ruchy wymagające siły",
+        level: "Poziom ekspert",
+        branches: [
+       
+          {
+            direction: "right",
+            skills: [
+              { id: "backspin", name: "Backspin", level: "Poziom 1" },
+              { id: "windmill", name: "Windmill", level: "Poziom 1", req: ["backspin"] },
+              { id: "flare", name: "Flare", level: "Poziom 2", req: ["windmill"] },
+              { id: "headspin", name: "Headspin", level: "Poziom 2", req: ["windmill"] },
+              { id: "airflare", name: "Airflare", level: "Poziom 3", req: ["flare","headspin"] }
+            ]
+          }
+        ]
+      },
+      {
+        id: "style",
+        name: "Styl i muzykalność",
+        desc: "Rozwijanie własnego stylu",
+        level: "Poziom mistrzowski",
+        branches: [
+          {
+            direction: "left",
+            skills: [
+              { id: "rhythm", name: "Czucie rytmu", level: "Poziom 1" },
+              { id: "musicality", name: "Muzykalność", level: "Poziom 2", req: ["rhythm"] },
+              { id: "transitions", name: "Płynne przejścia", level: "Poziom 2", req: ["musicality"] },
+              { id: "personal-style", name: "Własny styl", level: "Poziom 3", req: ["transitions"] }
+            ]
+          }
+        ]
+      }
+    ];
+
+
+
+    // Referencje do elementów DOM
+    const authContainer = document.getElementById('auth-container');
+    const appContainer = document.getElementById('app-container');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const loginError = document.getElementById('login-error');
+    const registerError = document.getElementById('register-error');
+    const userAvatar = document.getElementById('userAvatar');
+    const userName = document.getElementById('userName');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const skillTree = document.getElementById('skillTree');
+
+
+
+    // Przełączanie między formularzami
+    document.getElementById('show-register').addEventListener('click', () => {
+      loginForm.style.display = 'none';
+      registerForm.style.display = 'block';
+      registerError.textContent = '';
+    });
+
+    document.getElementById('show-login').addEventListener('click', () => {
+      registerForm.style.display = 'none';
+      loginForm.style.display = 'block';
+      loginError.textContent = '';
+    });
+
+    // Logowanie
+    document.getElementById('login-btn').addEventListener('click', async () => {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+      
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        loginError.textContent = '';
+      } catch (error) {
+        console.error('Błąd logowania:', error);
+        loginError.textContent = getAuthErrorMessage(error.code);
+      }
+    });
+
+    // Rejestracja
+    document.getElementById('register-btn').addEventListener('click', async () => {
+      const name = document.getElementById('register-name').value;
+      const email = document.getElementById('register-email').value;
+      const password = document.getElementById('register-password').value;
+      
+      if (!name) {
+        registerError.textContent = 'Podaj imię i nazwisko';
+        return;
+      }
+      
+      try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const user = userCredential.user;
+        
+        // Utwórz dokument użytkownika w Firestore
+        await setDoc(doc(db, "users", user.uid), {
+          name: name,
+          email: email,
+          role: "user",
+          skills: {},
+          createdAt: new Date()
+        });
+        
+        registerError.textContent = '';
+      } catch (error) {
+        console.error('Błąd rejestracji:', error);
+        registerError.textContent = getAuthErrorMessage(error.code);
+      }
+    });
+
+    // Wylogowanie
+    logoutBtn.addEventListener('click', async () => {
+      try {
+        await signOut(auth);
+      } catch (error) {
+        console.error('Błąd wylogowania:', error);
+      }
+    });
+
+    // Obserwuj stan autentykacji
+   // Obserwuj stan autentykacji
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    // Użytkownik zalogowany
+    currentUserId = user.uid;
+    authContainer.style.display = 'none';
+    appContainer.style.display = 'block';
+    
+    // Pobierz dane użytkownika
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    currentUserData = userDoc.exists() ? userDoc.data() : {};
+    
+    // Ustaw informacje o użytkowniku
+    userAvatar.textContent = currentUserData.name ? currentUserData.name.charAt(0).toUpperCase() : user.email.charAt(0).toUpperCase();
+    userName.textContent = currentUserData.name || user.email;
+    
+    // Załaduj umiejętności użytkownika
+    await loadUserSkills();
+    renderSkillTree();
+    
+    // Załaduj wszystkich użytkowników
+    await loadAllUsers();
+  } else {
+    // Użytkownik wylogowany
+    currentUserId = null;
+    currentUserData = null;
+    authContainer.style.display = 'block';
+    appContainer.style.display = 'none';
+  }
+});
+
+    // Załaduj umiejętności użytkownika z Firestore
+// Załaduj umiejętności użytkownika z Firestore
+async function loadUserSkills() {
+  if (!currentUserId) return;
+  
+  try {
+    const userDoc = await getDoc(doc(db, "users", currentUserId));
+    if (userDoc.exists()) {
+      const userData = userDoc.data();
+      userSkills = userData.skills || {};
+      usersData[currentUserId] = userData; // Zapisz dane bieżącego użytkownika
+    } else {
+      userSkills = {};
+    }
+  } catch (error) {
+    console.error("Błąd ładowania umiejętności:", error);
+    userSkills = {};
+  }
+}
+
+// Funkcja do renderowania drzewka
+// Funkcja do renderowania drzewka
+// Funkcja do renderowania drzewka
+function renderSkillTree() {
+  skillTree.innerHTML = '';
+  
+  // Dodaj centralną oś
+    //const axis = document.createElement('div');
+    //axis.className = 'tree-axis';
+    //skillTree.appendChild(axis);
+  
+  // Renderuj każdy poziom drzewka
+  SKILL_TREE.forEach((category, index) => {
+    const level = document.createElement('div');
+    level.className = 'tree-level';
+    
+    // Dodaj łącznik (oprócz pierwszego poziomu)
+    if (index > 0) {
+      const connector = document.createElement('div');
+      connector.className = 'connector vertical-connector';
+      level.appendChild(connector);
+    }
+    
+    // Główna umiejętność kategorii
+    const mainSkill = document.createElement('div');
+    const mainSkillLevel = userSkills[category.id] || 3;
+    mainSkill.className = `main-skill level${mainSkillLevel}`;
+    mainSkill.innerHTML = `<div class="skill-name">${category.name}</div>`;
+    level.appendChild(mainSkill);
+    
+    // Przycisk do zwijania/rozwijania gałęzi (tylko na urządzeniach mobilnych)
+    if (window.innerWidth <= 768) {
+      const toggleBtn = document.createElement('i');
+      toggleBtn.className = 'fas fa-eye-slash toggle-branch';
+      toggleBtn.onclick = function() {
+  const branches = level.querySelectorAll('.branch');
+  branches.forEach(branch => branch.classList.toggle('collapsed'));
+  toggleBtn.classList.toggle('fa-eye-slash');
+  toggleBtn.classList.toggle('fa-eye');
+};
+      level.appendChild(toggleBtn);
+    }
+    
+    // Renderuj gałęzie (lewa i prawa)
+    category.branches.forEach(branch => {
+      const branchDiv = document.createElement('div');
+      branchDiv.className = `branch branch-${branch.direction}`;
+      
+      let totalSkillsInBranch = branch.skills.length;
+      let unlockedSkillsInBranch = 0;
+      let hasVisibleSkills = false;
+      
+      // Najpierw policz wszystkie umiejętności (w tym z filmem)
+      branch.skills.forEach(skill => {
+        const userLevel = userSkills[skill.id] || 0;
+        
+        // Umiejętność jest odblokowana jeśli ma poziom 1 lub 2
+        if (userLevel === 1 || userLevel === 2) {
+          unlockedSkillsInBranch++;
         }
       });
+      
+      // Teraz renderuj umiejętności
+      branch.skills.forEach(skill => {
+        const userLevel = userSkills[skill.id] || 0; // 0 = zablokowane
+        
+        // UKRYJ KAFELKI BEZ POZIOMU 1 ANI 2
+        if (userLevel !== 1 && userLevel !== 2) {
+          return; // Pomijamy renderowanie tego kafelka
+        }
+        
+        hasVisibleSkills = true;
+        
+        const skillElement = document.createElement('div');
+        skillElement.className = `branch-skill level${userLevel}`;
+        
+        // TYLKO nazwa umiejętności - UKRYJ POZIOM
+        skillElement.innerHTML = `<div class="skill-name">${skill.name}</div>`;
+        
+        // Jeśli skill ma videoUrl, dodaj iframe
+        if (skill.videoUrl) {
+          const iframe = document.createElement('iframe');
+          iframe.src = skill.videoUrl;
+          iframe.allowFullscreen = true;
+          iframe.style.width = '100%';
+          iframe.style.height = '100px';
+          iframe.style.marginTop = '5px';
+          skillElement.appendChild(iframe);
+        }
+        
+        branchDiv.appendChild(skillElement);
+      });
+      
+      // Dodaj licznik postępu dla gałęzi tylko jeśli są widoczne umiejętności
+      if (hasVisibleSkills) {
+        const branchProgress = document.createElement('div');
+        branchProgress.className = 'branch-progress';
+        branchProgress.innerHTML = `<div class="progress-text">${unlockedSkillsInBranch}/${totalSkillsInBranch}</div>`;
+        branchDiv.appendChild(branchProgress);
+        
+        level.appendChild(branchDiv);
+      }
     });
+    
+    skillTree.appendChild(level);
+  });
+  
+  // Aktualizuj postęp
+  updateProgress();
+}
+
+
+    
+    // Aktualizuj pasek postępu
+    function updateProgress() {
+      const totalSkills = SKILL_TREE.reduce((total, category) => {
+        return total + category.branches.reduce((branchTotal, branch) => {
+          return branchTotal + branch.skills.length;
+        }, 0) + 1;
+      }, 0);
+      
+      const unlockedSkills = Object.values(userSkills).filter(level => level === 1 || level === 2).length;
+      const progressPercent = (unlockedSkills / totalSkills) * 100;
+      
+      document.getElementById('progressFill').style.width = `${progressPercent}%`;
+      document.getElementById('progressText').textContent = 
+        `${unlockedSkills}/${totalSkills} umiejętności`;
+    }
+    
+    // Funkcja do tłumaczenia kodów błędów Firebase
+    function getAuthErrorMessage(errorCode) {
+      switch (errorCode) {
+        case 'auth/email-already-in-use':
+          return 'Ten adres email jest już używany.';
+        case 'auth/invalid-email':
+          return 'Nieprawidłowy adres email.';
+        case 'auth/operation-not-allowed':
+          return 'Operacja nie jest dozwolona.';
+        case 'auth/weak-password':
+          return 'Hasło jest zbyt słabe. Użyj co najmniej 6 znaków.';
+        case 'auth/user-disabled':
+          return 'Konto zostało wyłączone.';
+        case 'auth/user-not-found':
+          return 'Nie znaleziono użytkownika.';
+        case 'auth/wrong-password':
+          return 'Nieprawidłowe hasło.';
+        default:
+          return 'Wystąpił nieznany błąd. Spróbuj ponownie.';
+      }
+    }
+    
+    // Funkcja zwracająca tekst dla poziomu umiejętności
+    function getLevelText(level) {
+      switch(level) {
+        case 1: return "Poziom 1";
+        case 2: return "Poziom 2";
+        default: return "Nieokreślony poziom";
+      }
+    }
+
+    
+
+
+// Funkcja do ładowania wszystkich użytkowników
+// Funkcja do ładowania wszystkich użytkowników
+async function loadAllUsers() {
+  try {
+    const usersSnapshot = await getDocs(collection(db, "users"));
+    allUsers = [];
+    
+    usersSnapshot.forEach(doc => {
+      const userData = doc.data();
+      usersData[doc.id] = userData;
+      
+      // Wyklucz obecnego użytkownika i adminów
+      if (doc.id !== currentUserId && userData.role !== 'admin') {
+        allUsers.push({
+          id: doc.id,
+          ...userData
+        });
+      }
+    });
+  } catch (error) {
+    console.error("Błąd ładowania użytkowników:", error);
+  }
+}
+
+// Funkcja do renderowania kafelków użytkowników
+function renderUsersGrid() {
+  const usersGrid = document.getElementById('users-grid');
+  usersGrid.innerHTML = '';
+  
+  allUsers.forEach(user => {
+    const userCard = document.createElement('div');
+    userCard.className = 'user-card';
+    userCard.style.cssText = `
+      background: #f5f5f5;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+      border: 2px solid #ddd;
+    `;
+    
+    userCard.innerHTML = `
+      <div style="font-size: 24px; margin-bottom: 10px;">${user.name?.charAt(0)?.toUpperCase() || 'U'}</div>
+      <h3 style="margin: 5px 0; color: #333;">${user.name || 'Użytkownik'}</h3>
+      <p style="color: #666; font-size: 12px;">${calculateProgress(user.skills || {})}% ukończonych</p>
+    `;
+    
+    userCard.addEventListener('click', () => {
+      viewUserSkills(user.id, user.name);
+    });
+    
+    userCard.addEventListener('mouseenter', () => {
+      userCard.style.transform = 'translateY(-5px)';
+      userCard.style.boxShadow = '0 5px 15px rgba(0,0,0,0.2)';
+    });
+    
+    userCard.addEventListener('mouseleave', () => {
+      userCard.style.transform = 'translateY(0)';
+      userCard.style.boxShadow = 'none';
+    });
+    
+    usersGrid.appendChild(userCard);
+  });
+}
+
+// Funkcja obliczająca postęp
+function calculateProgress(skills) {
+  const totalSkills = SKILL_TREE.reduce((total, category) => {
+    return total + category.branches.reduce((branchTotal, branch) => {
+      return branchTotal + branch.skills.length;
+    }, 0) + 1;
+  }, 0);
+  
+  const unlockedSkills = Object.values(skills).filter(level => level === 1 || level === 2).length;
+  return Math.round((unlockedSkills / totalSkills) * 100);
+}
+
+// Funkcja do podglądu umiejętności innego użytkownika
+// Funkcja do podglądu umiejętności innego użytkownika
+async function viewUserSkills(userId, userName) {
+  try {
+    // Ukryj grywalizację i pokaż drzewko
+    document.getElementById('gamification-section').style.display = 'none';
+    document.getElementById('skillTree').style.display = 'block';
+    isGamificationView = false;
+    
+    const userDoc = await getDoc(doc(db, "users", userId));
+    if (userDoc.exists()) {
+      userSkills = userDoc.data().skills || {};
+      document.getElementById('userName').textContent = `${userName} (podgląd)`;
+      renderSkillTree();
+      
+      // Dodaj przycisk powrotu (jeśli jeszcze nie istnieje)
+      let backButton = document.getElementById('backButton');
+      if (!backButton) {
+        backButton = document.createElement('button');
+        backButton.id = 'backButton';
+        backButton.textContent = 'Powrót do mojego widoku';
+        backButton.style.cssText = `
+          padding: 10px 15px;
+          background: #ff6b6b;
+          color: white;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          margin: 10px 0;
+          width: 100%;
+        `;
+        
+        backButton.onclick = async () => {
+          await loadUserSkills();
+          document.getElementById('userName').textContent = currentUserData?.name || 'Użytkownik';
+          renderSkillTree();
+          backButton.remove();
+        };
+        
+        const userPanel = document.querySelector('.user-panel');
+        userPanel.appendChild(backButton);
+      }
+    }
+  } catch (error) {
+    console.error("Błąd ładowania umiejętności użytkownika:", error);
+  }
+}
+
+
+
+
+// Obsługa przycisku Grywalizacja
+document.getElementById('gamificationBtn').addEventListener('click', async () => {
+  isGamificationView = !isGamificationView;
+  
+  if (isGamificationView) {
+    await loadAllUsers();
+    document.getElementById('gamification-section').style.display = 'block';
+    document.getElementById('skillTree').style.display = 'none';
+    
+    // Usuń przycisk powrotu jeśli istnieje
+    const backButton = document.getElementById('backButton');
+    if (backButton) {
+      backButton.remove();
+    }
+    
+    renderUsersGrid();
+  } else {
+    document.getElementById('gamification-section').style.display = 'none';
+    document.getElementById('skillTree').style.display = 'block';
+  }
+});
+
   </script>
+
+  <!-- W app-container, pod header ale przed skill-tree -->
+<div id="gamification-section" style="margin: 20px 0; display: none;">
+  <h2>Grywalizacja</h2>
+  <div id="users-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; margin-top: 15px;"></div>
+</div>
+
+
+
 </body>
 </html>
